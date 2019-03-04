@@ -6,12 +6,56 @@
     <title>Ghibli App</title>
     <link href="https://fonts.googleapis.com/css?family=Dosis:400,700" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vuex"></script>
     
+    <style type="text/css">
+    .box {
+      height:200px;
+      width:200px;
+      text-align: center;
+    }
+
+    .red {
+      background-color: red;
+    }
+    .green {
+      background-color: green;
+    }
+    </style>
   </head>
   <body>
     <div id="root"></div>
+    <!-- Vue tutorial -->
+    <h1>Vue Demo #1</h1>
+    <div id="vapp">
+      <colored-box class="red" v-show="display == 'redbox'"></colored-box>
+      <colored-box class="green" v-show="display == 'greenbox'"></colored-box>
+  </div>
 
-    <script src="scripts.js"></script>
+    <script src="scripts.js">
+    Vue.component('ColoredBox', {
+  template: "<div class=\"box\"><button v-on:click=\"toggleMe()\">Toggle Now</button></div>",
+  methods: {
+    toggleMe() {
+      this.$root.toggleBox()
+    }
+  }
+})
+    
+    const vueApp = new Vue({
+      el: '#vapp',
+      data: {
+        display: 'redbox'
+      }, 
+      methods: {
+        toggleBox() {
+          this.display == 'redbox' ? this.display = 'greenbox' :
+          this.display = 'redbox'
+        }
+      }
+    })
+    </script>
 
     <!-- built files will be auto injected -->
   </body>
